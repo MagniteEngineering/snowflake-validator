@@ -19,7 +19,7 @@ def main(session: snowpark.Session):
     is_membership_secure_view = membership_secure_view.count()
     is_taxonomy_secure_view = taxonomy_secure_view.count()
 
-    # Check Tables Exist
+    # Check Views Exist
     if (is_membership_secure_view != 1):
         return f"error: Your membership view does not exist or match the expected view name <{build_expected_secure_view_name_membership}>"
 
