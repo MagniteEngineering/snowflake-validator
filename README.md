@@ -43,7 +43,9 @@ This validation script validates -
 
 
 ## How to use
+
 Steps to use the script are in the following document -
+
 https://docs.google.com/document/u/1/d/e/2PACX-1vR2GuqGfhCHpXodO6vP-I4CP4YE2y5DXxu552b_OPSKU-0rOI_Znb8WdEabgSw2PncxAIs9QhjoY1-j/pub
 
 
