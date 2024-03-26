@@ -64,14 +64,14 @@ def main(session: snowpark.Session):
 
     table_schema_is_secure_membership = membership_secure_view.select("IS_SECURE").first()
     if table_schema_is_secure_membership is None:
-        return f"error: Your membership view is not a SECURE VIEW, run: ALTER VIEW {your_membership_view_name} SET SECURE;"
+        return f"error: Cannot find view {your_membership_view_name}, check your 'your_membership_view_name' variable is correct"
 
     if table_schema_is_secure_membership.IS_SECURE != 'YES':
         return f"error: Your membership view is not a SECURE VIEW, run: ALTER VIEW {your_membership_view_name} SET SECURE;"
 
     table_schema_is_secure_taxonomy = taxonomy_secure_view.select("IS_SECURE").first()
     if table_schema_is_secure_taxonomy is None:
-        return f"error: Your taxonomy view is not a SECURE VIEW, run: ALTER VIEW {your_taxonomy_view_name} SET SECURE;"
+        return f"error: Cannot find view {your_taxonomy_view_name}, check your 'your_taxonomy_view_name' variable is correct"
 
     if table_schema_is_secure_taxonomy.IS_SECURE != 'YES':
         return f"error: Your taxonomy view is not a SECURE VIEW, run: ALTER VIEW {your_taxonomy_view_name} SET SECURE;"
