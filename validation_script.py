@@ -79,15 +79,13 @@ def main(session: snowpark.Session):
     #
     # Check CHANGE_TRACKING = ON
     #
-    show_view_membership = \
-    session.sql(f"""SHOW VIEWS LIKE '{your_membership_view_name}' IN {your_database_and_schema_name};""").collect()[0][
+    show_view_membership = session.sql(f"""SHOW VIEWS LIKE '{your_membership_view_name}' IN {your_database_and_schema_name};""").collect()[0][
         "change_tracking"]
 
     if show_view_membership != 'ON':
         return f"error: Your membership view does not have CHANGE_TRACKING = ON, run: alter view {your_membership_view_name} set CHANGE_TRACKING = TRUE;"
 
-    show_view_taxonomy = \
-    session.sql(f"""SHOW VIEWS LIKE '{your_taxonomy_view_name}' IN {your_database_and_schema_name};""").collect()[0][
+    show_view_taxonomy = session.sql(f"""SHOW VIEWS LIKE '{your_taxonomy_view_name}' IN {your_database_and_schema_name};""").collect()[0][
         "change_tracking"]
 
     if show_view_taxonomy != 'ON':
