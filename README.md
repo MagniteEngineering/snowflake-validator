@@ -18,28 +18,28 @@ This validation script validates -
     
 ### Membership Table Requirements
 
-| Field | Data type | Required/Optional |
-| ------ | ------ | ------ |
-| StorageId | VARCHAR(255) | Required |
-| IdType | VARCHAR(36) | Required |
-| SegmentId | VARCHAR(36) | Required |
-| Active | BOOLEAN | Required |
-| UpdateTimestamp  | TIMESTAMP | Required |
+| Field | Data type     | Required/Optional |
+| ------ |---------------| ------ |
+| StorageId | VARCHAR(255)  | Required |
+| IdType | VARCHAR(36)   | Required |
+| SegmentId | VARCHAR(36)   | Required |
+| Active | BOOLEAN       | Required |
+| UpdateTimestamp  | TIMESTAMP NTZ | Required |
 
 ### Taxonomy Table Requirements
 
-| Field | Data type | Required/Optional |
-| ------ | ------ | ------ |
-| ClientName | VARCHAR(255) | Required |
-| AccountId | VARCHAR(36) | Required |
-| DataShareSettings | VARCHAR(36) | Required |
-| SegmentId | VARCHAR(36) | Required |
-| SegmentName | VARCHAR(255) | Required |
-| SegmentDescription | VARCHAR(255) | Optional |
-| SegmentCPM | DOUBLE | Optional |
-| Platform | VARCHAR(255) | Required |
-| Active | BOOLEAN | Required | True |
-| UpdateTimestamp | TIMESTAMP | Required |
+| Field | Data type     | Required/Optional |
+| ------ |---------------| ------ |
+| ClientName | VARCHAR(255)  | Required |
+| AccountId | VARCHAR(36)   | Required |
+| DataShareSettings | VARCHAR(36)   | Required |
+| SegmentId | VARCHAR(36)   | Required |
+| SegmentName | VARCHAR(255)  | Required |
+| SegmentDescription | VARCHAR(255)  | Optional |
+| SegmentCPM | DOUBLE        | Optional |
+| Platform | VARCHAR(255)  | Required |
+| Active | BOOLEAN       | Required | True |
+| UpdateTimestamp | TIMESTAMP NTZ | Required |
 
 
 ## How to use
