@@ -6,15 +6,13 @@ def main(session: snowpark.Session):
     #
     #  User Editable variables.
     #
-    your_database_schema_name = "SF_MAGNITE_TEST1_SHARE.PUBLIC"
-    your_taxonomy_table_name = "TAXONOMY"
-    your_membership_table_name = "MEMBERSHIP"
+    your_database_and_schema_name = "SF_MAGNITE_TEST1_SHARE.PUBLIC"
     your_taxonomy_view_name = "TAXONOMY_SECURE_VIEW"
     your_membership_view_name = "MEMBERSHIP_SECURE_VIEW"
 
-    # Full Paths to Tables
-    full_taxonomy_path = your_database_schema_name + "." + your_taxonomy_table_name
-    full_membership_path = your_database_schema_name + "." + your_membership_table_name
+    # Full Paths to Views
+    full_taxonomy_path = your_database_and_schema_name + "." + your_taxonomy_view_name
+    full_membership_path = your_database_and_schema_name + "." + your_membership_view_name
 
     #
     #  Check Schema is as expected
@@ -64,24 +62,30 @@ def main(session: snowpark.Session):
     taxonomy_secure_view = session.table('information_schema.views').filter(
         col('table_name') == your_taxonomy_view_name)
 
-    table_schema_is_secure_membership = membership_secure_view.select("IS_SECURE").first().IS_SECURE
-    if table_schema_is_secure_membership != 'YES':
+    table_schema_is_secure_membership = membership_secure_view.select("IS_SECURE").first()
+    if table_schema_is_secure_membership is None:
+        return f"error: Cannot find view {your_membership_view_name}, check your 'your_membership_view_name' variable is correct"
+
+    if table_schema_is_secure_membership.IS_SECURE != 'YES':
         return f"error: Your membership view is not a SECURE VIEW, run: ALTER VIEW {your_membership_view_name} SET SECURE;"
 
-    table_schema_is_secure_taxonomy = taxonomy_secure_view.select("IS_SECURE").first().IS_SECURE
-    if table_schema_is_secure_taxonomy != 'YES':
+    table_schema_is_secure_taxonomy = taxonomy_secure_view.select("IS_SECURE").first()
+    if table_schema_is_secure_taxonomy is None:
+        return f"error: Cannot find view {your_taxonomy_view_name}, check your 'your_taxonomy_view_name' variable is correct"
+
+    if table_schema_is_secure_taxonomy.IS_SECURE != 'YES':
         return f"error: Your taxonomy view is not a SECURE VIEW, run: ALTER VIEW {your_taxonomy_view_name} SET SECURE;"
 
     #
     # Check CHANGE_TRACKING = ON
     #
-    show_view_membership = session.sql(f"""SHOW VIEWS LIKE '{your_membership_view_name}' IN {your_database_schema_name};""").collect()[0][
+    show_view_membership = session.sql(f"""SHOW VIEWS LIKE '{your_membership_view_name}' IN {your_database_and_schema_name};""").collect()[0][
         "change_tracking"]
 
     if show_view_membership != 'ON':
         return f"error: Your membership view does not have CHANGE_TRACKING = ON, run: alter view {your_membership_view_name} set CHANGE_TRACKING = TRUE;"
 
-    show_view_taxonomy = session.sql(f"""SHOW VIEWS LIKE '{your_taxonomy_view_name}' IN {your_database_schema_name};""").collect()[0][
+    show_view_taxonomy = session.sql(f"""SHOW VIEWS LIKE '{your_taxonomy_view_name}' IN {your_database_and_schema_name};""").collect()[0][
         "change_tracking"]
 
     if show_view_taxonomy != 'ON':
