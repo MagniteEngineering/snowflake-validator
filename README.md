@@ -20,7 +20,7 @@ This validation script validates -
 
 | Field | Data type     | Required/Optional |
 | ------ |---------------| ------ |
-| StorageId | VARCHAR(255)  | Required |
+| StorageId | VARCHAR(4000) | Required |
 | IdType | VARCHAR(36)   | Required |
 | SegmentId | VARCHAR(36)   | Required |
 | Active | BOOLEAN       | Required |

@@ -18,7 +18,7 @@ def main(session: snowpark.Session):
     #  Check Schema is as expected
     #
     expected_schema_membership_column_list = [
-        """StructField('STORAGEID', StringType(255), nullable=False)""",
+        """StructField('STORAGEID', StringType(4000), nullable=False)""",
         """StructField('IDTYPE', StringType(36), nullable=False)""",
         """StructField('SEGMENTID', StringType(36), nullable=False)""",
         """StructField('ACTIVE', BooleanType(), nullable=False)""",
